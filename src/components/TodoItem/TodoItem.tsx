@@ -20,11 +20,11 @@ const Item = styled.li`
   }
 `;
 
-const Text = styled.span<{ completed: boolean }>`
+const Text = styled.span<{ $completed: boolean }>`
   flex-grow: 1;
   margin-left: 0.5rem;
-  text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
-  color: ${props => (props.completed ? '#999' : '#333')};
+  text-decoration: ${props => (props.$completed ? 'line-through' : 'none')};
+  color: ${props => (props.$completed ? '#999' : '#333')};
 `;
 
 const DeleteButton = styled.button`
@@ -53,7 +53,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   return (
     <Item>
       <Checkbox checked={todo.completed} onChange={() => toggleTodo(todo.id)} />
-      <Text completed={todo.completed}>{todo.text}</Text>
+      <Text $completed={todo.completed}>{todo.text}</Text>
       <DeleteButton onClick={() => deleteTodo(todo.id)}>&times;</DeleteButton>
     </Item>
   );
