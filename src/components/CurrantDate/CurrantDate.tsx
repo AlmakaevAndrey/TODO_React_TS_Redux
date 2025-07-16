@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
-import styled from 'styled-components';
+import { CurrantDateSpan } from './CurrantDate.styles';
 
 interface CurrantDateProps {
   format?: string;
 }
 
-const CurrantDateSpan = styled.span`
-  display: flex;
-`;
-
-export const CurrantDate: React.FC<CurrantDateProps> = ({
-  format = 'D MMMM YYYY, HH:mm',
-}) => {
-  const [currantTime, setCurrantTime] = useState(dayjs());
+export const CurrantDate: React.FC<CurrantDateProps> = () => {
+  const [currantTime, setCurrantTime] = useState(new Date());
 
   useEffect(() => {
-    const interval = setTimeout(() => {
-      setCurrantTime(dayjs());
-    }, 60000);
+    const interval = setInterval(() => {
+      setCurrantTime(new Date());
+    }, 1000);
 
     return () => clearInterval(interval);
-  }, [format]);
+  }, []);
 
-  return <CurrantDateSpan>{currantTime.format(format)}</CurrantDateSpan>;
+  const dateString = currantTime.toLocaleDateString('en-EN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  });
+
+  return <CurrantDateSpan>{dateString}</CurrantDateSpan>;
 };
 
 export default CurrantDate;

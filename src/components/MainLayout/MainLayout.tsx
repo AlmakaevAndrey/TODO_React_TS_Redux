@@ -1,28 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Header } from '../Header';
 import { Input } from '../Input';
 import { TodoList } from '../TodoList';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { deleteTodo, toggleTodo } from '../../store/todoSlice';
-import dayjs from 'dayjs';
+import * as S from './MainLayout.styles';
 
-const LayoutWrapper = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
-  min-height: 100%;
-`;
+const IS_ORANGE = false;
 
 export const MainLayout: React.FC = () => {
   const todos = useAppSelector(state => state.todos.todos);
   const dispatch = useAppDispatch();
-  dayjs.locale('en');
-  const currentYear = dayjs().format('YYYY');
+  const myDate = new Date();
+  const currentYear = myDate.getFullYear();
 
   return (
-    <LayoutWrapper>
+    <S.LayoutWrapper $isOrange={IS_ORANGE}>
       <div>
         <Header />
         <Input />
@@ -32,18 +25,11 @@ export const MainLayout: React.FC = () => {
           deleteTodo={id => dispatch(deleteTodo(id))}
         />
       </div>
-      <footer
-        style={{
-          padding: '1rem',
-          textAlign: 'center',
-          background: '#f3f3f3',
-          color: '#444',
-        }}
-      >
+      <S.MyFooter>
         Simple Todo App | {currentYear} <br />
         by Almakaev Andrey
-      </footer>
-    </LayoutWrapper>
+      </S.MyFooter>
+    </S.LayoutWrapper>
   );
 };
 

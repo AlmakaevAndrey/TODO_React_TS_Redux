@@ -1,5 +1,5 @@
-import { GlobalStyle } from '../public/style/GlobalStyles';
 import styled from 'styled-components';
+import { GlobalStyle } from '../public/style/GlobalStyles';
 import { MainLayout } from './components/MainLayout';
 
 const RootWrapper = styled.div`
@@ -10,12 +10,10 @@ const RootWrapper = styled.div`
 
 function App() {
   return (
-    <>
-      <RootWrapper>
-        <GlobalStyle />
-        <MainLayout></MainLayout>
-      </RootWrapper>
-    </>
+    <RootWrapper>
+      <GlobalStyle />
+      <MainLayout />
+    </RootWrapper>
   );
 }
 

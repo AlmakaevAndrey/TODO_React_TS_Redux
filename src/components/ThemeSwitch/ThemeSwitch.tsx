@@ -1,11 +1,19 @@
-import cls from "./ThemeSwitch.module.css"
+import React from 'react';
+import * as S from './ThemeSwitch.styles';
+import { useTheme } from './ThemeContext';
 
-export const ThemeSwitch = () => {
+export const ThemeSwitch: React.FC = () => {
+  const { isDark, toggleTheme } = useTheme();
+
   return (
-<div className={cls.checkbox_apple}>
-  <input className={cls.yep} id="check-apple" type="checkbox"/>
-  <label htmlFor="check-apple"></label>
-</div>
+    <S.CheckboxAppleWrapper>
+      <S.HiddenCheckbox
+        id="check-apple"
+        checked={isDark}
+        onChange={toggleTheme}
+      />
+      <S.StyledLabel htmlFor="check-apple" $checked={isDark} />
+    </S.CheckboxAppleWrapper>
   );
 };
 
